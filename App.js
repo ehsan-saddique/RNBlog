@@ -19,4 +19,5 @@ const App = createAppContainer(navigator)
 
 export default () => {
   return <App />
+
 }
