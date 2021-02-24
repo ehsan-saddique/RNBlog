@@ -18,17 +18,31 @@ const IndexScreen = (props) => {
             data={state}
             keyExtractor={(blog) => blog.title}
             renderItem={({ item }) => {
-                return <View style={styles.row}>
-                    <Text style={styles.title}>{item.title} - {item.id}</Text>
+                return (
+                    <TouchableOpacity onPress={() => props.navigation.navigate("Show", { id: item.id })}>
+                        <View style={styles.row}>
+                            <Text style={styles.title}>{item.title} - {item.id}</Text>
 
-                    <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                        <Feather style={styles.icon} name="trash" />
+                            <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                                <Feather style={styles.icon} name="trash" />
+                            </TouchableOpacity>
+                        </View>
                     </TouchableOpacity>
-                </View>
+                )
             }}
         />
     </View>
 
+}
+
+IndexScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+                <Feather name="plus" size={30} style={{ marginRight: 12 }} />
+            </TouchableOpacity>
+        ),
+    }
 }
 
 const styles = StyleSheet.create({
