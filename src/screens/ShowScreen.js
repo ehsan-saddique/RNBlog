@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useContext } from 'react'
-import { Text, StyleSheet, View, Button } from "react-native"
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native"
 import { Context } from '../context/BlogContext'
+import { EvilIcons } from "@expo/vector-icons";
 
 const ShowScreen = (props) => {
     const id = props.navigation.getParam("id")
@@ -10,14 +11,34 @@ const ShowScreen = (props) => {
 
     return <View>
         <Text style={styles.title}>{blogPost.title}</Text>
+        <Text style={styles.content}>{blogPost.content}</Text>
     </View>
 
 }
 
+ShowScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate('Edit', { id: navigation.getParam("id") })}>
+                <EvilIcons name="pencil" size={35} style={{ marginRight: 12 }} />
+            </TouchableOpacity>
+        ),
+    };
+}
+
 const styles = StyleSheet.create({
     title: {
-        fontSize: 18,
-        margin: 16
+        fontWeight: 'bold',
+        fontSize: 20,
+        marginLeft: 8,
+        marginRight: 8,
+        marginTop: 12,
+        marginBottom: 16,
+    },
+    content: {
+        fontSize: 16,
+        marginLeft: 8,
+        marginRight: 10
     }
 })
 
