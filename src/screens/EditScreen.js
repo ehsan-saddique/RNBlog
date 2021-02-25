@@ -14,8 +14,9 @@ const EditScreen = (props) => {
         <BlogPostForm
             initialValues={{ title: blogPost.title, content: blogPost.content }}
             onSubmit={(title, content) => {
-                updateBlogPost(id, title, content)
-                props.navigation.pop()
+                updateBlogPost(id, title, content, () => {
+                    props.navigation.pop()
+                })
             }} />
     </View>
 
