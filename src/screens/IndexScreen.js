@@ -11,6 +11,15 @@ const IndexScreen = (props) => {
     //useEffects with [] makes inner code execute only once
     useEffect(() => {
         getBlogPosts()
+
+        const listenr = props.navigation.addListener("didFocus", () => {
+            getBlogPosts()
+        })
+
+        //Kind of destructor or deinit. Will only be called when IndexScreen is being destroyed
+        return () => {
+            listenr.remove()
+        }
     }, [])
 
     return <View>

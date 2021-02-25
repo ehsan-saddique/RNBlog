@@ -10,8 +10,9 @@ const CreateScreen = (props) => {
 
     return <View>
         <BlogPostForm onSubmit={(title, content) => {
-            addBlogPost(title, content)
-            props.navigation.pop()
+            addBlogPost(title, content, () => {
+                props.navigation.pop()
+            })
         }} />
     </View>
 

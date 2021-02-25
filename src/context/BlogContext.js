@@ -1,5 +1,6 @@
 import React from "react"
 import { useReducer } from "react"
+import { call } from "react-native-reanimated"
 import jsonServer from "../api/jsonServer"
 import createDataContext from "./createDataContext"
 
@@ -37,8 +38,13 @@ const getBlogPosts = (dispatch) => {
 }
 
 const addBlogPost = (dispatch) => {
-    return (title, content) => {
-        dispatch({ type: "add", payload: { title, content } })
+    return async (title, content, callback) => {
+        // dispatch({ type: "add", payload: { title, content } })
+        // callback()
+        await jsonServer.post("/blogposts", { title: title, content: content })
+        if (callback) {
+            callback()
+        }
     }
 }
 
