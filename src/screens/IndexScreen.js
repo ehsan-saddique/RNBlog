@@ -6,7 +6,12 @@ import { Context } from '../context/BlogContext'
 import { Feather } from "@expo/vector-icons";
 
 const IndexScreen = (props) => {
-    const { state, deleteBlogPost } = useContext(Context)
+    const { state, deleteBlogPost, getBlogPosts } = useContext(Context)
+
+    //useEffects with [] makes inner code execute only once
+    useEffect(() => {
+        getBlogPosts()
+    }, [])
 
     return <View>
 
